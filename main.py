@@ -65,7 +65,7 @@ class lab_class:
             position = text.find('Glycated Haemoglobin (HbA‘c) '.lower())
             length = len('Glycated Haemoglobin (HbA‘c) ')
             for i in range(position + length, len(text)):
-                if text[i].isdigit():
+                if text[i].isdigit() or text[i]=='.':
                     Glycated += text[i]
                 else:
                     if not (text[i].isdigit()) and not (text[i].isspace()):
@@ -74,11 +74,22 @@ class lab_class:
             position = text.find('Glycated Haemoglobin (HbA1c) '.lower())
             length = len('Glycated Haemoglobin (HbA1c) ')
             for i in range(position + length, len(text)):
-                if text[i].isdigit():
+                if text[i].isdigit() or text[i]=='.':
                     Glycated += text[i]
                 else:
                     if not (text[i].isdigit()) and not (text[i].isspace()):
                         break
+
+        elif text.find('Glycated Haemoglobin (HbA tc) '.lower()) != -1:
+            position = text.find('Glycated Haemoglobin (HbA tc) '.lower())
+            length = len('Glycated Haemoglobin (HbA tc) ')
+            for i in range(position + length, len(text)):
+                if text[i].isdigit() or text[i]=='.':
+                    Glycated += text[i]
+                else:
+                    if not (text[i].isdigit()) and not (text[i].isspace()):
+                        break
+
         lengthGla = len(Glycated)
         if Glycated.find('.')==-1 and lengthGla!=0:
             Glycated = Glycated[:lengthGla - 1] + '.' + Glycated[lengthGla - 1:]
